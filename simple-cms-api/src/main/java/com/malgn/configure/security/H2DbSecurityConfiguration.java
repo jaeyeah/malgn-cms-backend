@@ -20,16 +20,11 @@ public class H2DbSecurityConfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain h2DbSecurityFilterChain(HttpSecurity http) {
 
-        http.securityMatcher(
-            PathPatternRequestMatcher.withDefaults()
-                .matcher("/h2-console/**"));
-
-        http.authorizeHttpRequests(requests -> requests.anyRequest().permitAll());
-
-        http.headers(
-            headers ->
+        http.authorizeHttpRequests(requests -> requests
+                .requestMatchers("/h2-console/**", "/api/**").permitAll()
+                .anyRequest().authenticated());
+        http.headers(headers ->
                 headers.frameOptions(FrameOptionsConfig::disable));
-
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);
 
