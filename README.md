@@ -1,9 +1,7 @@
-# 2026 신입 Back-End 개발자 코딩 과제 - 간단한 CMS REST API
+# 2026 신입 Back-End 개발자 코딩 과제
 
 2026년도 신입 Back-End 개발자 코딩 과제입니다.
 간단한 CMS(Contents Management System) REST API 를 구현하는 것이 목표입니다.
-
-외부 자료 검색 및 AI 도구 사용을 허용합니다. 다만, 제출물에 활용한 도구와 방식을 간단하게 명시해주시기 바랍니다.
 
 ## Spec
 
