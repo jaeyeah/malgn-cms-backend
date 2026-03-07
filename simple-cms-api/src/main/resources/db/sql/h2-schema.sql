@@ -8,3 +8,10 @@ create table contents (
     last_modified_date timestamp,
     last_modified_by varchar(50)
 );
+
+create table users (
+	user_id bigint auto_increment primary key,
+	user_name varchar(30) not null unique,
+	user_password varchar(100) not null,
+	user_role varchar(20) not null
+)
