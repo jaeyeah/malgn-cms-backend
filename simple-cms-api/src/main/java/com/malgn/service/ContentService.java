@@ -1,11 +1,14 @@
 package com.malgn.service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.malgn.dto.PageDto;
 import com.malgn.entity.Content;
 import com.malgn.repository.ContentRepository;
 
@@ -16,9 +19,18 @@ public class ContentService {
 	private ContentRepository contentRepository;
 	
 	//전체 조회
-	public List<Content> selectList(){
-		return contentRepository.findAll();
+//	public List<Content> selectList(){
+//		return contentRepository.findAll();
+//	}
+
+	//전체 조회 (페이징 적용)
+	public Page<Content> selectList(PageDto pageDto){
+		Pageable pageable = PageRequest.of(pageDto.getPage()-1, pageDto.getSize());
+		Page<Content> pageResult = contentRepository.findAll(pageable);
+		pageDto.setTotalCount((int) pageResult.getTotalElements());
+		return pageResult;
 	}
+	
 	
 	//조회
 	public Content selectOne(Long id) {

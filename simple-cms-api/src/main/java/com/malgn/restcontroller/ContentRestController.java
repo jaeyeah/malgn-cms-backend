@@ -1,8 +1,7 @@
 package com.malgn.restcontroller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.malgn.dto.PageDto;
 import com.malgn.entity.Content;
 import com.malgn.service.ContentService;
 
@@ -25,13 +25,13 @@ public class ContentRestController {
 	@Autowired
 	private ContentService contentService;
 	
-	// 전체 조회
+	// 목록 조회
     @GetMapping
-    public List<Content> selectList() {
-        return contentService.selectList();
+    public Page<Content> selectList(PageDto pageDto) {
+        return contentService.selectList(pageDto);
     }
 
-    // 단건 조회
+    // 상세 조회
     @GetMapping("/{id}")
     public Content selectOne(@PathVariable Long id) {
         return contentService.selectOne(id);
