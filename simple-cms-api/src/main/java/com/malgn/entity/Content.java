@@ -11,9 +11,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
@@ -34,7 +32,7 @@ public class Content {
     @Column(name = "view_count", nullable = false)
     private Long viewCount = 0L;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
 
     @Column(name = "created_by", nullable = false, length = 50)
