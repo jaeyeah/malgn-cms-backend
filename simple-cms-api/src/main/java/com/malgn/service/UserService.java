@@ -28,6 +28,15 @@ public class UserService {
         return userRepository.save(user);
 	}
 	
-	
+	//로그인
+	public User login(String userId, String userPassword) {
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
+        if (!passwordEncoder.matches(userPassword, user.getUserPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        return user;
+	}
 
 }
