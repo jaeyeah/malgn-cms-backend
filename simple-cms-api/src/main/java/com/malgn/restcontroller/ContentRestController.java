@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.malgn.entity.Content;
@@ -44,13 +45,18 @@ public class ContentRestController {
 
     // 수정
     @PutMapping("/{id}")
-    public Content update(@PathVariable Long id, @RequestBody Content content) {
-        return contentService.update(id, content);
+    public Content update(@PathVariable Long id,
+    			@RequestBody Content content,
+    			@RequestParam String loginId, @RequestParam String loginRole) {
+    	contentService.check(id, loginId, loginRole);
+    	return contentService.update(id, content);
     }
 
     // 삭제
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id,
+    		@RequestParam String loginId, @RequestParam String loginRole) {
+    	contentService.check(id, loginId, loginRole);
         contentService.delete(id);
     }
 }

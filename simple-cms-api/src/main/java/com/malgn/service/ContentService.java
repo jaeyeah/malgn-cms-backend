@@ -51,4 +51,16 @@ public class ContentService {
 	}
 	
 	
+	//권한 체크 (작성자 확인 / 관리자 확인)
+	public void check(Long id, String loginId, String loginRole) {
+		Content content = contentRepository.findById(id)
+				.orElseThrow(()->new IllegalArgumentException("존재하지 않는 콘텐츠입니다."));		
+		boolean isWriter = content.getCreatedBy().equals(loginId);
+		boolean isAdmin = "ADMIN".equals(loginRole);
+		if (!isWriter && !isAdmin) {
+            throw new IllegalArgumentException("수정 또는 삭제 권한이 없습니다.");
+        }
+	}
+	
+	
 }
