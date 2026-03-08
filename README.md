@@ -9,20 +9,32 @@ Spring Boot + Spring Security + JPA 기반, 콘텐츠 관리 시스템(백엔드
 - H2 (db)
 - Lombok (필요시)
 
-## 과제 목표
-- 간단한 CMS 콘텐츠 관리 API 를 구현 해주세요.
-- DB Schema 모두 구현해주세요.
-- DB 는 h2 를 사용해주세요.
-- 가능한 예외처리도 구현해주세요.
-- 필요하다고 생각되는 부분은 추가로 구현해도 됩니다.
+## ERD
+User
+ - userId
+ - userName
+ - userPassword
+ - userRole
+
+Content
+ - id
+ - title
+ - description
+ - viewCount
+ - createdDate
+ - createdBy
+ - lastModifiedDate
+ - lastModifiedBy
 
 ## 프로젝트 실행방법
 ### 1. 프로젝트 다운로드
-git clone [Repository URL]
+git clone https://github.com/jaeyeah/malgn-cms-backend.git
 ### 2. 프로젝트 실행
+### 3. H2 DB 접속
+http://localhost:8080/h2-console
 
 
-#### 구현 기능
+## 구현 기능
 - 콘텐츠 목록 조회 (페이징)
 - 콘텐츠 상세 조회
 - 콘텐츠 추가  
