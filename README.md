@@ -40,27 +40,24 @@ http://localhost:8080/h2-console
 - 콘텐츠 추가  
 - 콘텐츠 수정    (작성자 본인 or 관리자만)
 - 콘텐츠 삭제    (작성자 본인 or 관리자만)
-
-### 로그인
-- Spring Security 기반
-*** 1. 사용자가 userId와 userPassword로 로그인 요청
-*** 2. Spring Security의 AuthenticationManager가 인증
+- 로그인 Spring Security 기반
+- 회원가입
 
 
 # REST API
-*** 회원가입
+### 회원가입
 POST /api/user/join
-*** 로그인
+### 로그인
 POST /api/user/login
-*** 콘텐츠 등록
+### 콘텐츠 등록
 POST /api/contents
-*** 콘텐츠 목록
+### 콘텐츠 목록
 GET /api/contents?page=&size=
-*** 콘텐츠 상세조회
+### 콘텐츠 상세조회
 GET /api/content/{id}
-*** 콘텐츠 수정
+### 콘텐츠 수정
 PUT /api/contents/{id}
-*** 콘텐츠 삭제
+### 콘텐츠 삭제
 put /api/contentes/{id}
 
 # 사용한 AI 도구
