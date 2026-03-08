@@ -69,7 +69,7 @@ public class ContentService {
 		Content content = contentRepository.findById(id)
 				.orElseThrow(()->new IllegalArgumentException("존재하지 않는 콘텐츠입니다."));		
 		boolean isWriter = content.getCreatedBy().equals(loginId);
-		boolean isAdmin = "ADMIN".equals(loginRole);
+		boolean isAdmin = "ROLE_ADMIN".equals(loginRole);
 		if (!isWriter && !isAdmin) {
             throw new IllegalArgumentException("수정 또는 삭제 권한이 없습니다.");
         }

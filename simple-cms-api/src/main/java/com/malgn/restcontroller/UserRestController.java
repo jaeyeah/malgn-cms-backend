@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +38,8 @@ public class UserRestController {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 				loginRequestDto.getUserId(), loginRequestDto.getUserPassword());
 		Authentication authentication = authenticationManager.authenticate(token);
-		
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		request.getSession(true);
 		User user = userService.login(loginRequestDto.getUserId(), loginRequestDto.getUserPassword());
 		return LoginResponseDto. builder()
 				.userId(user.getUserId())
