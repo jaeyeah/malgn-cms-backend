@@ -16,50 +16,43 @@ Spring Boot + Spring Security + JPA 기반, 콘텐츠 관리 시스템(백엔드
 - 가능한 예외처리도 구현해주세요.
 - 필요하다고 생각되는 부분은 추가로 구현해도 됩니다.
 
-## 데이터 모델
+## 프로젝트 실행방법
+### 1. 프로젝트 다운로드
+git clone [Repository URL]
+### 2. 프로젝트 실행
 
-### Contents
 
-| 컬럼명                | 이름  | 설명          | 데이터 타입                      | 비고 |
-|--------------------|-----|-------------|-----------------------------|----|
-| id                 | 아이디 | 고유 아이디      | bigint primary key not null |    |
-| title              | 제목  | contents 제목 | varchar(100) not null       |    |
-| description        | 내용  | contents 내용 | text                        |    |
-| view_count         | 조회수 | 조회수         | bigint not null             |    |
-| created_date       | 생성일 | 생성한 날짜      | timestamp                   |    |
-| created_by         | 생성자 | 생성한 사용자     | varchar(50) not null        |    |
-| last_modified_date | 수정일 | 마지막 수정일     | timestamp                   |    |
-| last_modified_by   | 수정자 | 마지막 수정한 사용자 | varchar(50)                 |    |
-
-## 구현 기능
-- 콘텐츠 관련 CRUD
-
-#### 기능
-- 콘텐츠 추가
+#### 구현 기능
 - 콘텐츠 목록 조회 (페이징)
 - 콘텐츠 상세 조회
-- 콘텐츠 수정
-- 콘텐츠 삭제
+- 콘텐츠 추가  
+- 콘텐츠 수정    (작성자 본인 or 관리자만)
+- 콘텐츠 삭제    (작성자 본인 or 관리자만)
 
 ### 로그인
-- Spring Security 를 이용해서 로그인을 필수로 구현해주세요.
-- 로그인 방식은 자유롭게 선택하여 구현하되, `README.md` 에 명시해주세요
-- Role
-    - 관리자(ADMIN)
-    - 사용자(USER)
-
-### 접근 권한
-
-- 접근 권한을 필수로 구현해주세요.
-- 콘텐츠 생성자 본인만 수정 + 삭제 가능하게 구현해주세요.
-- 단, 관리자(ADMIN) 인 경우 모든 콘텐츠에 대해 수정 + 삭제할 수 있게 구현해주세요.
+- Spring Security 기반
+*** 1. 사용자가 userId와 userPassword로 로그인 요청
+*** 2. Spring Security의 AuthenticationManager가 인증
 
 
+# REST API
+*** 회원가입
+POST /api/user/join
+*** 로그인
+POST /api/user/login
+*** 콘텐츠 등록
+POST /api/contents
+*** 콘텐츠 목록
+GET /api/contents?page=&size=
+*** 콘텐츠 상세조회
+GET /api/content/{id}
+*** 콘텐츠 수정
+PUT /api/contents/{id}
+*** 콘텐츠 삭제
+put /api/contentes/{id}
 
-
-
-
-
-
-
+# 사용한 AI 도구
+- ChatGPT
+  - MyBatis 방식 → JPA 방식 전환
+  - Spring Security 로그인 구조 적용
 
