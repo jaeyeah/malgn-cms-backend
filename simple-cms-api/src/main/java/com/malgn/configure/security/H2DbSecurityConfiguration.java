@@ -1,16 +1,16 @@
 package com.malgn.configure.security;
 
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Configuration
@@ -21,8 +21,11 @@ public class H2DbSecurityConfiguration {
     public SecurityFilterChain h2DbSecurityFilterChain(HttpSecurity http) {
 
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/h2-console/**", "/api/**").permitAll()
-                .anyRequest().authenticated());
+        		.requestMatchers("/h2-console/**").permitAll()
+        		.requestMatchers("/api/user/join", "/api/user/login").permitAll()
+        		.requestMatchers(HttpMethod.GET, "/api/contents", "/api/contents/*").permitAll()
+        		.anyRequest().authenticated()
+        		);
         http.headers(headers ->
                 headers.frameOptions(FrameOptionsConfig::disable));
         http.csrf(AbstractHttpConfigurer::disable);

@@ -22,9 +22,7 @@ public class UserService {
 			throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
 		}
 		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-        if (user.getUserRole() == null || user.getUserRole().isBlank()) {
-            user.setUserRole("USER");
-        }
+        user.setUserRole("USER");
         return userRepository.save(user);
 	}
 	
