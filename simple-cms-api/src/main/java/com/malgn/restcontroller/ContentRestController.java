@@ -2,6 +2,7 @@ package com.malgn.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,15 +40,21 @@ public class ContentRestController {
 
     // 등록
     @PostMapping
-    public Content create(@RequestBody Content content) {
-        return contentService.create(content);
+    public Content create(@RequestBody Content content, Authentication authentication) {
+        String loginId = authentication.getName();
+    	return contentService.create(content, loginId);
     }
 
     // 수정
     @PutMapping("/{id}")
     public Content update(@PathVariable Long id,
     			@RequestBody Content content,
-    			@RequestParam String loginId, @RequestParam String loginRole) {
+    			Authentication authentication) {
+    	String loginId = authentication.getName();
+        String loginRole = authentication.getAuthorities().stream()
+                .map(auth -> auth.getAuthority())
+                .findFirst()
+                .orElse("");
     	contentService.check(id, loginId, loginRole);
     	return contentService.update(id, content);
     }
@@ -55,7 +62,12 @@ public class ContentRestController {
     // 삭제
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id,
-    		@RequestParam String loginId, @RequestParam String loginRole) {
+    		Authentication authentication) {
+    	String loginId = authentication.getName();
+    	String loginRole = authentication.getAuthorities().stream()
+                .map(auth -> auth.getAuthority())
+                .findFirst()
+                .orElse("");
     	contentService.check(id, loginId, loginRole);
         contentService.delete(id);
     }

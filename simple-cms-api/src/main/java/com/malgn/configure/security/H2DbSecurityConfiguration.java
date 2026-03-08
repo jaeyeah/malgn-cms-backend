@@ -19,13 +19,8 @@ public class H2DbSecurityConfiguration {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain h2DbSecurityFilterChain(HttpSecurity http) {
-
-        http.authorizeHttpRequests(requests -> requests
-        		.requestMatchers("/h2-console/**").permitAll()
-        		.requestMatchers("/api/user/join", "/api/user/login").permitAll()
-        		.requestMatchers(HttpMethod.GET, "/api/contents", "/api/contents/*").permitAll()
-        		.anyRequest().authenticated()
-        		);
+    	http.securityMatcher("/h2-console/**");
+        http.authorizeHttpRequests(requests -> requests.anyRequest().permitAll());
         http.headers(headers ->
                 headers.frameOptions(FrameOptionsConfig::disable));
         http.csrf(AbstractHttpConfigurer::disable);

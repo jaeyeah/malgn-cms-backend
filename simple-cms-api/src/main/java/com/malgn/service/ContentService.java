@@ -39,7 +39,8 @@ public class ContentService {
 	}
 	
 	//등록
-	public Content create(Content content) {
+	public Content create(Content content, String loginId) {
+		content.setCreatedBy(loginId);
 		return contentRepository.save(content);
 	}
 	
